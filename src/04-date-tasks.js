@@ -99,7 +99,7 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
+function angleBetweenClockHands(date) {
   let h = date.getUTCHours();
   if (h > 11) h -= 12;
   const m = date.getUTCMinutes();
