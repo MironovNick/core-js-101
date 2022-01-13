@@ -1,3 +1,9 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
+/* eslint-disable no-use-before-define */
+/* eslint-disable max-len */
 /* ********************************************************************************************
  *                                                                                            *
  * Please read the following tutorial before implementing tasks:                               *
@@ -35,8 +41,11 @@ function findElement(/* arr, value */) {
  *    2 => [ 1, 3 ]
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  let arr = new Array(len);
+  let a = arr.fill(0);
+  let arr1 = arr.map((value, index) => 1 + index * 2);
+  return arr1;
 }
 
 
@@ -52,8 +61,8 @@ function generateOdds(/* len */) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
+function doubleArray(arr) {
+  return arr.concat(arr);
 }
 
 
@@ -68,8 +77,8 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfPositives(arr) {
+  return arr.filter((val) => val > 0);
 }
 
 /**
@@ -130,8 +139,8 @@ function getUpperCaseStrings(/* arr */) {
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  return arr.map((val) => val.length);
 }
 
 /**
@@ -199,8 +208,12 @@ function getTail(/* arr, n */) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.reduce((total, val, i, ar) => {
+    let str = total + val.toString();
+    if (i !== ar.length - 1) str += '\n';
+    return str;
+  }, '');
 }
 
 /**
@@ -233,8 +246,12 @@ function toArrayOfSquares(/* arr */) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let sum = 0;
+  return arr.map((val) => {
+    sum += val;
+    return sum;
+  });
 }
 
 /**
@@ -248,8 +265,8 @@ function getMovingSum(/* arr */) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.filter((val, i) => i % 2);
 }
 
 
@@ -416,8 +433,12 @@ function toStringList(/* arr */) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  function sortCountry(item1, item2) {
+    if (item1.country > item2.country || (item1.country === item2.country && item1.city > item2.city)) { return 1; } return -1;
+  }
+
+  return arr.sort(sortCountry);
 }
 
 /**
@@ -455,8 +476,13 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const arr = new Array(end - start + 1);
+  arr.fill(0);
+  return arr.map(IntervalArray);
+  function IntervalArray(val, i) {
+    return start + i;
+  }
 }
 
 /**
@@ -470,8 +496,14 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const arr_dist = [];
+  function dist(val) {
+    let res = arr_dist.indexOf(val) === -1;
+    if (res) arr_dist.push(val);
+    return res;
+  }
+  return arr.filter(dist);
 }
 
 /**
@@ -504,8 +536,14 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  function grp(total, val, i) {
+    let arr_val = [];
+    if (total.has(keySelector(val))) { arr_val = total.get(keySelector(val)); }
+    arr_val.push(valueSelector(val));
+    return total.set(keySelector(val), arr_val);
+  }
+  return array.reduce(grp, new Map());
 }
 
 
@@ -522,8 +560,12 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  function selMany(total, val) {
+    return total.concat(childrenSelector(val));
+  }
+
+  return arr.reduce(selMany, []);
 }
 
 
@@ -539,8 +581,11 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  function ElementByIndexes(total, val) {
+    return total[val];
+  }
+  return indexes.reduce(ElementByIndexes, arr);
 }
 
 
@@ -562,8 +607,11 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length === 1) { return arr; }
+  let h = Math.trunc(arr.length / 2);
+  if (arr.length % 2) { return arr.slice(-h).concat(arr.slice(h, h + 1)).concat(arr.slice(0, h)); } 
+  return arr.slice(-h).concat(arr.slice(0, h));
 }
 
 
